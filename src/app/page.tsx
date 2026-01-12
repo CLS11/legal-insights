@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { ChevronRight, Mail, BookOpen, Users, FileText, Search, Calendar, User, ArrowLeft, Plus, Trash2, Eye } from 'lucide-react';
 
@@ -33,7 +35,7 @@ export default function LegalBlogPlatform() {
   const [currentPage, setCurrentPage] = useState('home');
   const [blogs, setBlogs] = useState(initialBlogs);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [selectedBlog, setSelectedBlog] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState('');
   
   // Admin dashboard state
@@ -81,7 +83,7 @@ export default function LegalBlogPlatform() {
     alert('Blog published successfully!');
   };
 
-  const handleDeleteBlog = (id) => {
+  const handleDeleteBlog = (id: number) => {
     if (confirm('Are you sure you want to remove this blog?')) {
       setBlogs(blogs.filter(b => b.id !== id));
       setSelectedBlog(null);
@@ -253,7 +255,7 @@ export default function LegalBlogPlatform() {
 
             <div className="mt-8 pt-6 border-t">
               <div className="flex flex-wrap gap-2">
-                {selectedBlog.tags.map(tag => (
+                {selectedBlog.tags.map((tag: string) => (
                   <span key={tag} className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm">{tag}</span>
                 ))}
               </div>
@@ -412,14 +414,14 @@ export default function LegalBlogPlatform() {
               />
               <textarea
                 placeholder="Excerpt"
-                rows="2"
+                rows={2}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 value={newBlog.excerpt}
                 onChange={(e) => setNewBlog({...newBlog, excerpt: e.target.value})}
               />
               <textarea
                 placeholder="Full Content (HTML supported) *"
-                rows="6"
+                rows={6}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 value={newBlog.content}
                 onChange={(e) => setNewBlog({...newBlog, content: e.target.value})}
